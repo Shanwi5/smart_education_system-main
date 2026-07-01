@@ -1,7 +1,6 @@
 
 import os
 import django
-from django.contrib.auth.models import User
 from datetime import datetime, timedelta
 from random import randint, choice
 
