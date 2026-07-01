@@ -26,7 +26,7 @@ SECRET_KEY = config(
 
 DEBUG = config(
     "DJANGO_DEBUG",
-    default=True,
+    default=False,
     cast=bool
 )
 
