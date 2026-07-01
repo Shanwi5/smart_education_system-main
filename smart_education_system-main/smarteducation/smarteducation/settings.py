@@ -12,24 +12,28 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 import os
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-ENVIRONMENT = os.environ.get('DJANGO_ENV', 'development')
+ENVIRONMENT = config("DJANGO_ENV", default="development")
 
+SECRET_KEY = config(
+    "DJANGO_SECRET_KEY",
+    default="django-insecure-znkn3tz7r9zs$gur)59k3m7@moq^6s&)3!$93zv*#1_x19-r3l"
+)
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
+DEBUG = config(
+    "DJANGO_DEBUG",
+    default=True,
+    cast=bool
+)
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-znkn3tz7r9zs$gur)59k3m7@moq^6s&)3!$93zv*#1_x19-r3l')
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DJANGO_DEBUG', 'True').lower() in {'1', 'true', 'yes', 'on'}
-
-ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
-
+ALLOWED_HOSTS = config(
+    "DJANGO_ALLOWED_HOSTS",
+    default="localhost,127.0.0.1"
+).split(",")
 
 # Application definition
 
